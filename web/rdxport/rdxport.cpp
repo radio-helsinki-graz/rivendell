@@ -100,6 +100,15 @@ Xport::Xport(QObject *parent,const char *name)
     Exit(0);
   }
   delete q;
+  q=new RDSqlQuery("SET CHARACTER SET utf8");
+  if(!q->exec()) {
+    printf("Content-type: text/plain\n");
+    printf("Status: 500\n\n");
+    printf("rdxport: switching database connection to UTF-8 failed\n");
+    db->removeDatabase(xport_config->mysqlDbname());
+    Exit(0);
+  }
+  delete q;
 
   //
   // Determine Connection Type
