@@ -70,11 +70,11 @@ void Xport::TrimAudio()
   //
   // Open Audio File
   //
-  RDWaveFile *wave=new RDWaveFile(RDCut::pathName(cartnum,cutnum));
-  if(!wave->openWave()) {
+  RDWaveFile wave(RDCut::pathName(cartnum,cutnum));
+  if(!wave.openWave()) {
     XmlExit("No such audio",404);
   }
-  if(!wave->hasEnergy()) {
+  if(!wave.hasEnergy()) {
     XmlExit("No peak data available",404);
   }
 
@@ -87,14 +87,14 @@ void Xport::TrimAudio()
   printf("  <cartNumber>%u</cartNumber>\n",cartnum);
   printf("  <cutNumber>%d</cutNumber>\n",cutnum);
   printf("  <trimLevel>%d</trimLevel>\n",trim_level);
-  point=wave->startTrim(REFERENCE_LEVEL-trim_level);
+  point=wave.startTrim(REFERENCE_LEVEL-trim_level);
   if(point>=0) {
-    point=(double)point*1000.0/(double)wave->getSamplesPerSec();
+    point=(double)point*1000.0/(double)wave.getSamplesPerSec();
   }
   printf("  <startTrimPoint>%d</startTrimPoint>\n",point);
-  point=wave->endTrim(REFERENCE_LEVEL-trim_level);
+  point=wave.endTrim(REFERENCE_LEVEL-trim_level);
   if(point>=0) {
-    point=(double)point*1000.0/(double)wave->getSamplesPerSec();
+    point=(double)point*1000.0/(double)wave.getSamplesPerSec();
   }
   printf("  <endTrimPoint>%d</endTrimPoint>\n",point);
   printf("</trimPoint>\n");
