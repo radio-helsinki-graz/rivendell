@@ -3962,7 +3962,7 @@ void RDWaveFile::ReadFlacMetadata()
     // so we just scan to the first instance of it.
     int nameLength = entry.find('=');
     if(nameLength < 0) continue; // malformed comment, it would seem
-    QString name = entry.left(nameLength), value = entry.mid(nameLength + 1);
+    QString name = entry.left(nameLength).upper(), value = entry.mid(nameLength + 1);
 	   
     if(name=="TITLE") { 
       wave_data->setTitle(value); 
