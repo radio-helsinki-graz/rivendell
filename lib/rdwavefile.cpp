@@ -3965,34 +3965,34 @@ void RDWaveFile::ReadFlacMetadata()
     QString name = entry.left(nameLength).upper(), value = entry.mid(nameLength + 1);
 	   
     if(name=="TITLE") { 
-      wave_data->setTitle(value); 
+      wave_data->setTitle(value.utf8()); 
       wave_data->setMetadataFound(true); 
       continue;
     }
     if(name=="ARTIST") { 
-      composer=value;
+      composer=value.utf8();
       wave_data->setMetadataFound(true);
       continue;
     }
     if(name=="PERFORMER") { 
-      artist=value;
+      artist=value.utf8();
       wave_data->setMetadataFound(true);
     }
     if(name=="ALBUM") { 
-      wave_data->setAlbum(value);
+      wave_data->setAlbum(value.utf8());
       wave_data->setMetadataFound(true);
       continue;
     }
     if(name=="ORGANIZATION") {
-      wave_data->setLabel(value);
+      wave_data->setLabel(value.utf8());
       wave_data->setMetadataFound(true);
       continue;
     }
     // TODO: Parse the date field to get the year out
-    //if(name == "DATE") { wave_data->setReleaseYear(value);
+    //if(name == "DATE") { wave_data->setReleaseYear(value.utf8());
     //wave_data->setMetadataFound(true); continue; }
     if(name=="ISRC") { 
-      wave_data->setIsrc(value); 
+      wave_data->setIsrc(value.utf8()); 
       wave_data->setMetadataFound(true); 
       continue; 
     }
